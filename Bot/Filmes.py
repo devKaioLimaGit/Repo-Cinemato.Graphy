@@ -72,13 +72,14 @@ def iniciar_bot(caminho_arquivo, caixa_status):
             diretor = safe_xpath('//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[3]/div[2]/div[1]/section/div[2]/ul/li[1]/div/ul/li/a')
             descricao = safe_xpath('//span[contains(@data-testid, "plot-xl")]')
             href = driver.find_element(By.XPATH, '//*[@id="__next"]/main/div/section[1]/div/section/div/div[1]/section[5]/div[1]/div/a').get_attribute('href')
+            estrela = driver.find_element(By.XPATH, '/html/body/div[2]/main/div/section[1]/section/div[3]/section/section/div[2]/div[2]/div/div[1]/a').get_attribute('href')
+
             try:
                 poster = driver.find_element(By.CSS_SELECTOR, "[data-testid='hero-media__poster']").find_element(By.TAG_NAME, "img").get_attribute("src")
             except:
                 poster = "Não encontrado"
 
-
-            print(href)
+        
             dados_filmes.append({
                 "name": nome,
                 "gender": " ",
@@ -88,7 +89,8 @@ def iniciar_bot(caminho_arquivo, caixa_status):
                 "duration": duracao,
                 "director": diretor,
                 "assesment": nota,
-                "link": href
+                "link": href,
+                "star": estrela
             })
 
             caixa_status.insert(tk.END, f"✅ {nome} coletado\n")
